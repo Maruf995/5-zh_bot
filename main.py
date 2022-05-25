@@ -6,7 +6,7 @@ import time
 import json
 from discord.utils import get
 from config import settings
-from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS
+from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS, spat_emoje, emoje
 import random
 from random import choice
 from discord.ext import tasks, commands
@@ -49,7 +49,7 @@ async def on_message(message):
     WARN = BADWORDS + LINKS
     msg = message.content.lower()
     if msg in idy_spat:
-        await message.channel.send(f"{choice(spat_spisok)}")
+        await message.channel.send(f"{choice(spat_spisok)} {choice(spat_emoje)}")
     if msg in knigi:
         await message.channel.send('Напиши команду: ?book')
     if message.author == bot.user:
@@ -127,9 +127,19 @@ async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, id=883259920982605834)
 
     await member.add_roles(role)
-    await channel.send(embed=discord.Embed(description='Добро Пожаловать! \n'
-                                                       f'``{member.name}``, Зашел в нашу беседу\n'
-                                                       'Чувствуй себя как дома и соблюдай правила!',
+    welcome = ['Добро Пожаловать! \n'
+               f'``{member.name}``, Зашел в нашу беседу\n'
+               'Чувствуй себя как дома и соблюдай правила!\n'
+               'И пропиши команду: ?info',
+               'Здравствуй!\n'
+               f'``{member.name}``, Теперь ты в нашей беседе\n'
+               'Соблюдай правила и не говори ничего лишнего\n'
+               f'Не забудь прописать команду: ?info',
+               'Добрый День!'
+               f'``{member.name}``, Теперь ты один из нас\n'
+               'Не забывай соблюдать правила, и не матерись!\n'
+               'не забудь прописать: ?info']
+    await channel.send(embed=discord.Embed(description=f'{choice(welcome)} {choice(emoje)}',
                                            color=0x0c0c0))
 
 
