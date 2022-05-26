@@ -135,7 +135,7 @@ async def on_member_join(member):
                f'``{member.name}``, Теперь ты в нашей беседе\n'
                'Соблюдай правила и не говори ничего лишнего\n'
                f'Не забудь прописать команду: ?info',
-               'Добрый День!'
+               'Добрый День!\n'
                f'``{member.name}``, Теперь ты один из нас\n'
                'Не забывай соблюдать правила, и не матерись!\n'
                'не забудь прописать: ?info']
@@ -460,56 +460,7 @@ async def vilenkin(ctx):
 
 
 ###################################################################
-# ERROR
-@bot.event
-async def on_comman_error(ctx, error):
-    pass
 
-
-@clear.error
-async def clear_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f'{ctx.author.name}, обязательно укажите аргумент!')
-
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send(embed=discord.Embed(
-            title="Ошибка",
-            description='*У вас недостаточно прав!*',
-            timestamp=ctx.message.created_at,
-        ))
-
-
-@ban.error
-async def ban_error(ctx, error):
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send(embed=discord.Embed(
-            title="Ошибка",
-            description='*У вас недостаточно прав!*',
-            timestamp=ctx.message.created_at,
-        ))
-
-
-@kick.error
-async def kick_error(ctx, error):
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send(embed=discord.Embed(
-            title="Ошибка",
-            description='*У вас недостаточно прав!*',
-            timestamp=ctx.message.created_at,
-        ))
-
-
-@mute.error
-async def mute_error(ctx, error):
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send(embed=discord.Embed(
-            title="Ошибка",
-            description='*У вас недостаточно прав!*',
-            timestamp=ctx.message.created_at,
-        ))
-
-
-#############################################################################################################
 
 # Команды help, info
 @bot.command()
@@ -583,5 +534,61 @@ async def admin(ctx):
 
 ########################################################################################################
 
+# ERROR
+
+
+@clear.error
+async def clear_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f'{ctx.author.name}, обязательно укажите аргумент!')
+
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
+
+
+@ban.error
+async def ban_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
+
+
+@kick.error
+async def kick_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
+
+
+@mute.error
+async def mute_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
+
+@admin.error
+async def admin_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
+
+
+#############################################################################################################
 
 bot.run(settings['token'])
