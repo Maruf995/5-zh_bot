@@ -588,6 +588,14 @@ async def admin_error(ctx, error):
             timestamp=ctx.message.created_at,
         ))
 
+@clear_warns.error
+async def clear_warns_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send(embed=discord.Embed(
+            title="Ошибка",
+            description='*У вас недостаточно прав!*',
+            timestamp=ctx.message.created_at,
+        ))
 
 #############################################################################################################
 
