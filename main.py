@@ -317,7 +317,7 @@ async def table(ctx):
 
 @bot.command()
 async def zvonok(ctx):
-    await ctx.send(f'`Расписание Звонков`', file=discord.File('media/zvonkov.jpeg'))
+    await ctx.send(f'`Расписание Звонков`', file=discord.File('media/zvonok.jpeg'))
 
 
 @bot.command()
