@@ -21,16 +21,13 @@ bot.remove_command('help')
 
 # Система предупреждений
 
-bot.lavalink_nodes = [
-    {"host":"losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
-]
-
-# bot.spotify_credentials = {
-#     'client_id': 'CLIENT_ID_HERE',
-#     'client_secret': 'CLIENT_SECRET_HERE'
-# }
-
-bot.load_extension('dismusic')
+# bot.lavalink_nodes = [
+#     {"host":"losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
+# ]
+#
+#
+#
+# bot.load_extension('dismusic')
 
 @bot.event
 async def on_ready():
