@@ -16,11 +16,7 @@ PREFIX = '?'
 bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
 bot.remove_command('help')
 
-bot.lavalink_nodes = [
-    {"host": "losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
-]
 
-bot.load_extension('dismusic')
 
 
 # Система предупреждений
