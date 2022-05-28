@@ -10,11 +10,6 @@ from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS, spat_emoje, emoj
 import random
 from random import choice
 from discord.ext import tasks, commands
-import asyncio
-import functools
-import itertools
-import math
-from youtube_dl import YoutubeDL
 import discord
 
 from async_timeout import timeout
@@ -330,6 +325,29 @@ async def zvonok(ctx):
 
 
 @bot.command()
+async def teachers(ctx):
+    await ctx.send(f'`ФИО Преподавателей 5-Ж Класса`')
+    await ctx.send('                                                                                              \n`'
+                   '                                                                                              \n'
+                   '   Русский: Таранова Любовь Дмитриевна                                                        \n'
+                   '   Литература: Таранова Любовь Дмитриевна                                                     \n'
+                   '   Англисский(группа 2): Айгерина Алмабаевна                                                  \n'
+                   '   Англисский(группа 1): Светлана Иванова                                                     \n'
+                   '   Человек и Общество: Соловьева Анна Владимировна                                            \n'
+                   '   Естествознание: Тимофеева Тамара Викторовна                                                \n'
+                   '   Кыргызский(группа 1): Такырбашова Жылдыз Карыбековна                                       \n'
+                   '   Кыргызский(группа 2): Сыйнат Тосовновна                                                    \n'
+                   '   ИЗО: Резина Наталья Николаевна                                                             \n'
+                   '   Истроия: Сулайманова Алина Туртубековна                                                    \n'
+                   '   Адабият: Такырбашова Жылдыз Карыбековна                                                    \n'
+                   '   Музыка: Алферова Наталья Александровна                                                     \n'
+                   '   Математика: Карукес Татьяна Геннадьевна                                                    \n'
+                   '   Физкультура: Адинай Кылычбековна                                                           \n'
+                   '                                                                                              \n`'
+                   )
+
+
+@bot.command()
 async def hw(ctx):
     await ctx.send('`Д/З По Всем Урокам`', )
 
@@ -610,25 +628,6 @@ async def clear_warns_error(ctx, error):
 
 
 #############################################################################################################
-
-YDL_OPTIONS = {'format': 'worstaudio/best', 'noplaylist': 'False', 'simulate': 'True',
-               'preferredquality': '192', 'preferredcodec': 'mp3', 'key': 'FFmpegExtractAudio'}
-FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
-
-
-@bot.command()
-async def play(ctx, *, arg):
-    vc = await ctx.message.author.voice.channel.connect()
-
-    with YoutubeDL(YDL_OPTIONS) as ydl:
-        if 'https://' in arg:
-            info = ydl.extract_info(arg, download=False)
-        else:
-            info = ydl.extract_info(f"ytsearch:{arg}", download=False)['entries'][0]
-
-    url = info['formats'][0]['url']
-
-    vc.play(discord.FFmpegPCMAudio(executable="ffmpeg\\ffmpeg.exe", source=url, **FFMPEG_OPTIONS))
 
 
 bot.run(settings['token'])
