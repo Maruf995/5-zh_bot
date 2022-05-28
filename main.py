@@ -10,7 +10,6 @@ from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS, spat_emoje, emoj
 import random
 from random import choice
 from discord.ext import commands
-import discord
 
 PREFIX = '?'
 bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
