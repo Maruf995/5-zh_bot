@@ -9,11 +9,10 @@ from config import settings
 from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS, spat_emoje, emoje
 import random
 from random import choice
-from discord.ext import tasks, commands
+from discord.ext import commands
 import discord
 
-from async_timeout import timeout
-from discord.ext import commands
+
 
 PREFIX = '?'
 bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
@@ -22,9 +21,21 @@ bot.remove_command('help')
 
 # Система предупреждений
 
+bot.lavalink_nodes = [
+    {"host":"losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
+]
+
+# bot.spotify_credentials = {
+#     'client_id': 'CLIENT_ID_HERE',
+#     'client_secret': 'CLIENT_SECRET_HERE'
+# }
+
+bot.load_extension('dismusic')
+
 @bot.event
 async def on_ready():
     print('Ехало')
+
 
     await bot.change_presence(status=discord.Status.online, activity=discord.Game('?info'))
 
