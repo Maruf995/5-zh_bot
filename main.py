@@ -12,27 +12,22 @@ from random import choice
 from discord.ext import commands
 import discord
 
-
-
 PREFIX = '?'
 bot = commands.Bot(command_prefix=PREFIX, intents=discord.Intents.all())
 bot.remove_command('help')
 
+bot.lavalink_nodes = [
+    {"host": "losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
+]
+
+bot.load_extension('dismusic')
+
 
 # Система предупреждений
-
-# bot.lavalink_nodes = [
-#     {"host":"losingtime.dpaste.org", "port": 2124, "password": "SleepingOnTrains"},
-# ]
-#
-#
-#
-# bot.load_extension('dismusic')
 
 @bot.event
 async def on_ready():
     print('Ехало')
-
 
     await bot.change_presence(status=discord.Status.online, activity=discord.Game('?info'))
 
