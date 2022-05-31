@@ -237,7 +237,7 @@ async def warn(ctx, member: discord.Member, reason: str):
 
         emb = discord.Embed(
             title='Нарушение',
-            description=f"*Ранее, у нарушителя было уже {data[str(member.id)]['WARNS'] - 1} нарушение, после 7 он будет забанен!*",
+                description=f"*Ранее, у нарушителя было уже {data[str(member.id)]['WARNS'] - 1} нарушение, после 7 он будет забанен!*",
             timestamp=ctx.message.created_at
         )
 
