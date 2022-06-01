@@ -6,9 +6,13 @@ import time
 import json
 from discord.utils import get
 from config import settings
-from list import BADWORDS, idy_spat, knigi, spat_spisok, LINKS, spat_emoje, emoje
+from list import BADWORDS, idy_spat, knigi, spat_spisok, spat_emoje, emoje
 import random
 from random import choice
+from discord.ext import tasks, commands
+import discord
+
+from async_timeout import timeout
 from discord.ext import commands
 
 PREFIX = '?'
@@ -46,7 +50,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     await bot.process_commands(message)
-    WARN = BADWORDS + LINKS
+    WARN = BADWORDS
     msg = message.content.lower()
     if msg in idy_spat:
         await message.channel.send(f"{choice(spat_spisok)} {choice(spat_emoje)}")
@@ -192,7 +196,7 @@ async def mute(ctx, member: discord.Member):
 @bot.command()
 @commands.has_permissions(administrator=True)
 async def warn(ctx, member: discord.Member, reason: str):
-    if reason.lower() == "badwords" or reason.lower() == "links":
+    if reason.lower() == "badwords":
         with open('users.json', 'r') as file:
             data = json.load(file)
             file.close()
@@ -237,7 +241,7 @@ async def warn(ctx, member: discord.Member, reason: str):
 
         emb = discord.Embed(
             title='Нарушение',
-                description=f"*Ранее, у нарушителя было уже {data[str(member.id)]['WARNS'] - 1} нарушение, после 7 он будет забанен!*",
+            description=f"*Ранее, у нарушителя было уже {data[str(member.id)]['WARNS'] - 1} нарушение, после 7 он будет забанен!*",
             timestamp=ctx.message.created_at
         )
 
